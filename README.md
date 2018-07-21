@@ -1,6 +1,6 @@
-# AFrame Playground
+# A-Frame Playground
 
-The AFrame playground gives you a tool, to load a presentation of a number of example HTML files and click through them while showing code and result in one view. Made for educational purposes to teach [A-Frame](https://aframe.io/) but can also be used with standard HTML.
+The A-Frame playground gives you a tool, to load a presentation of a number of example HTML files and click through them while showing code and result in one view. Made for educational purposes to teach [A-Frame](https://aframe.io/) but can also be used with standard HTML.
 
 ## Installation
 Download the zip or clone into the project.
@@ -18,3 +18,7 @@ After that, you should be able to open ```http://localhost:9001/playground``` an
 
 ![screenshot](screenshot.png "Screenshot")
 
+
+## Adapt
+
+To use your own example files, put them into the examples directory and add them to the examples array [here](https://github.com/dirkk0/aframe-playground/blob/master/playground/index.html#L55).
