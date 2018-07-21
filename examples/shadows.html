@@ -1,0 +1,55 @@
+
+<html>
+<head>
+    <script src="../js/aframe8.2.min.js"></script>
+  </head>
+<body>
+
+<!--START-->
+<!--
+  Casting and receiving shadows.
+-->
+<a-scene>
+  <a-box shadow="cast:true;receive:true;" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+  <a-sphere shadow="cast:true;receive:true;" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+  <a-cylinder shadow="cast:true;receive:true;" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+  <a-plane shadow="cast:true;receive:true;" position="0 0 -4" rotation="-90 0 0" width="40" height="40" color="#7BC8A4"></a-plane>
+  <a-sky color="#111111"></a-sky>
+
+  <a-entity light="type: point; color: #FFF; intensity: 0.6" position="0 0.5 -3.0"></a-entity>
+
+  <!-- <a-scene light="defaultLightsEnabled: false"></a-scene> -->
+
+  <a-entity light="type:directional;
+                castShadow:true;
+                color:#FFFFFF;
+                shadowMapWidth:4096;
+                shadowMapHeight:4096;
+                shadowCameraRight:20;
+                shadowCameraTop:20;
+                shadowCameraLeft:-20;
+                shadowCameraBottom:-20"
+                position="10 10 0">
+  </a-entity>
+
+
+  <!--
+  <a-entity light="type: directional;
+                   castShadow: true;
+                   intensity: 0.4;
+                   shadowCameraVisible: true;"
+            position="10 10 0">
+          </a-entity>
+	-->
+
+
+</a-scene>
+<!--END-->
+
+<script>
+document.querySelector('a-scene').addEventListener('loaded', function () {
+  console.log("OK GO loaded");
+});
+</script>
+</body>
+</html>

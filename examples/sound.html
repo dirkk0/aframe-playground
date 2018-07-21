@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html>
+<head>
+  <title>Audio Test</title>
+  <script src="../js/aframe8.2.min.js"></script>
+</head>
+<body>
+
+<!--START-->
+<!--
+  Loads a sound and plays it every 3 sconds.
+-->
+
+<a-scene>
+
+  <a-assets>
+    <!-- see https://github.com/aframevr/aframe/issues/2754 -->
+    <!-- <audio id="blip" src="../assets/beep.mp3" preload="auto"></audio> -->
+    <a-asset-item id="blip" src="../assets/beep.mp3" response-type="arraybuffer"></a-asset-item>
+  </a-assets>
+
+  <a-grid static-body></a-grid>
+
+  <!-- plays with JS -->
+  <a-sphere color="green" position="1 1.5 -3">
+    <a-entity id="b1" sound="on: my-animation-ready; src: #blip; autoplay: false; loop: false; volume: 1"></a-entity>
+  </a-sphere>
+
+</a-scene>
+
+<!--END-->
+
+
+  <script>
+"use strict";
+
+document.querySelector('a-scene').addEventListener('loaded', function () {
+  console.log("OK GO loaded");
+
+  // console.log("blip");
+  // document.querySelector('#b1').emit('my-animation-ready');
+  var i1 = setInterval(function() {
+      console.log("blip");
+      document.querySelector('#b1').emit('my-animation-ready');
+  }, 3000);
+});
+
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<html>
+
+<head>
+    <title>A-Frame Playground</title>
+    <meta name="description" content="Play around with A-Frame." />
+
+    <script src="../js/codemirror/lib/codemirror.js"></script>
+    <script src="../js/codemirror/mode/xml/xml.js"></script>
+    <script src="../js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="../js/codemirror/mode/javascript/javascript.js"></script>
+    <script src="../js/codemirror/addon/selection/active-line.js"></script>
+    <script src="../js/codemirror/addon/selection/mark-selection.js"></script>
+    <link rel="stylesheet" href="../js/codemirror/lib/codemirror.css">
+
+    <link rel="stylesheet" type="text/css" href="../js/codemirror/theme/monokai.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"> -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <!-- <style type="text/css">
+.CodeMirror {background: #aaa;}
+.important { background: red; }
+.CodeMirror-selectedtext { background: transparent !important; }
+div.CodeMirror-cursors {z-index: 4;}
+</style>
+ -->
+
+</head>
+
+<body>
+    <div id="outerframe">
+        <iframe id="f3" width="99%" height="250" frameBorder="1" style="display:inline;"></iframe>
+        <!--         <iframe id="f2" width="39%" height="300" frameBorder="1"  style="display:inline;"></iframe>
+ -->
+    </div>
+    <div id="btns">
+        <!-- <button id="run">RUN</button> -->
+        <!-- <br /> -->
+    </div>
+
+    <!-- uncomment the two buttons to activate the cache -->
+    <!-- <button id="saveCache">saveCache</button> -->
+    <!-- <button id="runCache">runCache</button> -->
+    <!-- <br /> -->
+
+
+    <select id="theme" onchange="setTheme()">
+        <option value="monokai">monokai
+        <option value="standard">standard
+    </select>
+
+    <script>
+        // add examples here (must be in examples directory and end with .html):
+        var examples = ["intro", "cube", "scene", "sound", "physics", "shadows", "video", ];
+
+        var cache;
+
+        function add(entry) {
+            var e1 = document.createElement("input");
+            var e2 = document.getElementById("f2");
+            e1.setAttribute("type", "button");
+            e1.setAttribute("value", entry);
+            e1.setAttribute("name", "button3");
+            e1.setAttribute("onclick", "loadFile('" + entry + "'); runThis();");
+            document.getElementById('btns').appendChild(e1);
+
+            // e2.src = "data/sample_a.html"
+        }
+        examples.forEach(function (entry) {
+            add(entry);
+        });
+        var editor1 = CodeMirror(document.body, {
+            mode: {
+                name: "xml"
+            },
+            lineNumbers: true,
+            indentUnit: 4,
+            styleActiveLine: true,
+            matchBrackets: true,
+            lineHighlight: {
+                from: 2,
+                to: 4
+            },
+        });
+
+        editor1.setOption("theme", "monokai");
+        editor1.setSize("100%", 200);
+
+
+
+        var editor2 = CodeMirror(document.body, {
+            mode: {
+                name: "javascript"
+            },
+            lineNumbers: true,
+            indentUnit: 4,
+            styleActiveLine: true,
+            matchBrackets: true,
+        });
+
+        editor2.setOption("theme", "monokai");
+        editor2.setSize("100%", 200);
+
+
+        var srccode = "";
+        var headcode = "";
+        var htmlcode = "";
+        var jscode = "";
+        var o_htmlcode = "";
+        var o_jscode = "";
+
+        loadFile = function (filename) {
+            var xhReq = new XMLHttpRequest();
+            // Date.now to avoid caching
+            xhReq.open("GET", "../examples/" + filename + ".html?" + + Date.now(), false);
+            xhReq.send(null);
+            var serverResponse = xhReq.responseText;
+            // document.getElementById("t1").value = (serverResponse);
+            headcode = serverResponse.split("<head>")[1].split("</head>")[0];
+            htmlcode = serverResponse.split("<!--START-->")[1].split("<!--END-->")[0];
+
+            o_jscode = jscode;
+            o_htmlcode = htmlcode;
+
+            jscode = serverResponse.split("<script>")[1].split("<\/script>")[0];
+            // var description = serverResponse.split("<!-- COMMENT:")[1].split("-->")[0]
+            // console.log(htmlcode);
+            editor1.setValue(htmlcode);
+            editor2.setValue(jscode);
+            // e2.src = description
+
+
+
+            // set selection
+            // editor1.setSelection({ line: 3, ch: 0 }, { line: 5, ch: 0 })
+
+
+        }
+
+        loadT = function () {
+            // I really should use fetch here.
+            var xhReq = new XMLHttpRequest();
+            xhReq.open("GET", "template.html", false);
+            xhReq.send(null);
+            var serverResponse = xhReq.responseText;
+            return serverResponse
+        }
+        var template = loadT()
+
+        var runCache = function () {
+            editor1.setValue(cache)
+            runThis();
+        }
+
+        var saveCache = function () {
+            console.log(srccode)
+            cache = editor1.getValue();
+        }
+
+        var runThis = function () {
+            // if (temp) {
+            //     var srccode = temp;
+            // } else {
+            // var srccode = editor1.getValue();
+            // }
+            var srccode = editor1.getValue();
+            var jscode = editor2.getValue();
+
+            // fill in source code
+            var temp = template.replace("#JSCODE#", jscode)
+            temp = temp.replace("#HEADCODE#", headcode)
+            temp = temp.replace("#HTMLCODE#", srccode)
+
+
+            if (document.getElementById("f3")) {
+                document.getElementById("outerframe").removeChild(document.getElementById("f3"));
+                // console.log("removed iframe")
+            }
+
+
+
+            var iframe = document.createElement('iframe');
+            iframe.frameBorder = 1;
+            iframe.width = "99%";
+            iframe.height = "250px";
+            iframe.id = "f3";
+
+            console.clear();
+
+            iframe.onload = function () {
+                var doc = iframe.contentDocument || iframe.contentWindow.document;
+                var p = doc.createElement('p');
+                // p.textContent = "Paragraph in iframe" + Date.now();
+                // doc.body.appendChild(p);
+                // console.log(temp);
+
+                doc.open();
+                doc.write(temp);
+                doc.close();
+
+            };
+
+            document.getElementById("outerframe").appendChild(iframe);
+
+
+            // experiments with active lines, didn't really work out yet
+
+            // editor1.markText({line: 2, ch: 1}, {line: 2, ch: 6}, {className: "CodeMirror-focused"});
+            // editor1.setSelection({line: 2, ch: 1}, {line: 2, ch: 6} );
+
+            // var a1 = {line: 0, ch: 2 };
+            // var a2 = {line: 3, ch: 5 };
+            // var b1 = {line: 5, ch: 0 };
+            // var b2 = {line: 7, ch: 0 };
+
+            // var c = [{ 'anchor': a1, 'head': a2},{ 'anchor': b1, 'head': b2} ];
+            // editor2.setSelections(c);
+
+        };
+
+
+        var setTheme = function (argument) {
+            var x = document.getElementById("theme").value;
+            console.log(x);
+            if (x == "monokai") {
+                editor1.setOption("theme", "monokai");
+                editor2.setOption("theme", "monokai");
+            } else {
+                editor1.setOption("theme", "default");
+                editor2.setOption("theme", "default");
+            }
+        }
+
+        // document.getElementById("run").addEventListener("click", runThis);
+
+        // uncomment this to activate the cache
+        // document.getElementById("saveCache").addEventListener("click", saveCache);
+        // document.getElementById("runCache").addEventListener("click", runCache);
+
+
+        loadFile(examples[0]);
+        runThis();
+
+        setInterval(function () {
+            if (o_htmlcode != editor1.getValue()) {
+                runThis();
+                o_htmlcode = editor1.getValue();
+            }
+            // if ( o_jscode != editor2.getValue()) {
+            //     runThis();
+            //     o_jscode = editor2.getValue();
+            // }
+        }, 1000);
+
+    </script>
+
+</body>
+
+</html>

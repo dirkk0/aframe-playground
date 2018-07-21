@@ -1,0 +1,60 @@
+
+<html>
+<head>
+
+    <!-- old school -->
+    <!-- <script src='js/aframe7.js'></script> -->
+    <!-- <script src='js/aframe-extras.js'></script> -->
+
+    <!-- new school -->
+    <script src="../js/aframe8.2.min.js"></script>
+    <script src="../js/aframe-physics-system.min.js"></script>
+
+</head>
+<body>
+
+<!--START-->
+<!--
+  Load Don McCurdy's and Stefan Hedmann's physics engine and throw cubes. 
+-->
+<a-scene physics="debug: true">
+
+  <a-entity camera
+            universal-controls
+            position="-2 1.764 0"
+            rotation="0 -110 0"
+            kinematic-body
+            jump-ability="enableDoubleJump: false; distance: 5;"
+            >
+  </a-entity>
+
+
+
+  <!-- Ground -->
+  <!-- <a-grid static-body></a-grid> -->
+  <a-plane rotation="-90 0 0" scale="25 25 0.1" color="#0000dd" static-body></a-plane>
+
+  <!-- Obstacles -->
+  <a-box color="#39BB82"
+         width="15" height="5" depth="3"
+         position="8 2.5 -5"
+         static-body></a-box>
+  <a-box color="#39BB82"
+         width="15" height="5" depth="3"
+         position="8 2.5 5"
+         static-body></a-box>
+
+	<!-- Immovable box -->
+	<a-box static-body position="0 1 -5" width="3" height="1" depth="1"></a-box>
+
+	<!-- Dynamic box -->
+	<a-box dynamic-body position="5 15 0" width="1" height="1" depth="1"></a-box>
+
+</a-scene>
+<!--END-->
+
+<script>
+
+</script>
+</body>
+</html>
