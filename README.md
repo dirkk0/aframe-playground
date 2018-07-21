@@ -17,14 +17,16 @@ If you prefer NodeJS, you can install a web server with
 
 After that, you should be able to open ```http://localhost:9001/playground``` and see this:
 
-![screenshot](screenshot.png "Screenshot")
+![screenshot](screenshot.png "Screenshot" width=100)
 
 
 ## Features
 
 - fast loading of both code and render of HTML/JS on the click
-- code editing via [CodeMirror/](https://codemirror.net/)
+- code editing via [CodeMirror](https://codemirror.net/)
 - hot reloading
+- no server sided components (only the web server)
+- works on mobile devices
 
 There are a number of features that could be implemented additionally ( file save, autocompletion etc) but I felt the feature set was sufficient for my use case. Feel free to create issues to discuss more features.
 
@@ -33,4 +35,8 @@ There are a number of features that could be implemented additionally ( file sav
 To use your own example files, prepare them by adding a ```<!--START-->``` and ```<!--END--> ``` to the HTML which you want to showcase (see an example [here](https://github.com/dirkk0/aframe-playground/blob/master/examples/cube.html)).
 
 Then put them into the examples directory and add them to the examples array [here](https://github.com/dirkk0/aframe-playground/blob/master/playground/index.html#L55).
+
+## How it works
+
+Everything is done in client-sided JavaScript; the code examples are split into the distinct code views, reassambled once the code is edited, and reloaded into an iFrame.
 
