@@ -6,13 +6,11 @@ You can try a [demo here](https://curious-electric.com/w/experiments/aframe/afra
 
 
 ## Installation
-Download the zip or clone into the project.
+Download the zip und unzip it or clone into the project. To use it you need to run a simple HTTP Server in the main directory.
 
-To use it you need to install a simple HTTP Server.
+On Unix-type OSes you can usually use ```python -m SimpleHTTPServer 9001``` .
 
-On Unix-type OSes you can usually use ```python -m SimpleHTTPServer 9001```.
-
-If you have NodeJS installed, you can install a web server with
+If you prefer NodeJS, you can install a web server with
 
     npm install http-server -g
     http-server -p 9001
@@ -28,7 +26,7 @@ After that, you should be able to open ```http://localhost:9001/playground``` an
 - code editing via [CodeMirror/](https://codemirror.net/)
 - hot reloading
 
-There are a number of features that could be implemented additionally ( file save, autocompletion etc) but I felt the feature set was sufficient for my use case. Feel free to create issues to discuss.
+There are a number of features that could be implemented additionally ( file save, autocompletion etc) but I felt the feature set was sufficient for my use case. Feel free to create issues to discuss more features.
 
 ## Adapt
 
