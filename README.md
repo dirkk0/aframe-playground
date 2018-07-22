@@ -1,6 +1,6 @@
 # A-Frame Playground
 
-The A-Frame playground aims to provide a tool to edit and show A-Frame examples in the most frictionless way possible. It doesn't need any online connection and only works with a local webserver.
+The A-Frame playground aims to provide a tool to edit and show A-Frame examples in the most frictionless way possible. It doesn't need any online connection and only needs a local webserver.
 
 Made for educational purposes to teach [A-Frame](https://aframe.io/) but can also be used with standard HTML.
 
@@ -24,7 +24,7 @@ After that, you should be able to open ```http://localhost:9001/playground``` an
 
 ## Features
 
-- fast loading of both code and render of HTML/JS on the click
+- fast loading of both code and render view of HTML/JS with one click
 - code editing via [CodeMirror](https://codemirror.net/)
 - hot reloading
 - no server sided components (only the web server)
@@ -34,7 +34,7 @@ There are a number of features that could be implemented additionally ( file sav
 
 ## Adapt
 
-To use your own example files, prepare them by adding a ```<!--START-->``` and ```<!--END--> ``` to the HTML which you want to showcase (see an example [here](https://github.com/dirkk0/aframe-playground/blob/master/examples/cube.html)).
+To use your own example files, prepare them by adding a ```<!--START-->``` and ```<!--END--> ``` line to the HTML which you want to use in the use case (see an example [here](https://github.com/dirkk0/aframe-playground/blob/master/examples/cube.html)).
 
 Then put them into the examples directory and add them to the examples array [here](https://github.com/dirkk0/aframe-playground/blob/master/playground/index.html#L55).
 
