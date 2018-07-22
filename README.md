@@ -17,7 +17,7 @@ If you prefer NodeJS, you can install a web server with
 
 After that, you should be able to open ```http://localhost:9001/playground``` and see this:
 
-![screenshot](screenshot.png)
+![screenshot](screenshot2.png)
 
 
 ## Features
