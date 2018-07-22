@@ -1,12 +1,14 @@
 # A-Frame Playground
 
-The A-Frame playground gives you a tool, to load a presentation of a number of example HTML files and click through them while showing code and result in one view. Made for educational purposes to teach [A-Frame](https://aframe.io/) but can also be used with standard HTML.
+The A-Frame playground aims to provide a tool to edit and show A-Frame examples in the most frictionless way possible. It doesn't need any online connection and only works with a local webserver.
+
+Made for educational purposes to teach [A-Frame](https://aframe.io/) but can also be used with standard HTML.
 
 You can try a [demo here](https://curious-electric.com/w/experiments/aframe/aframe-playground/playground).
 
 
 ## Installation
-Download the zip und unzip it or clone into the project. To use it you need to run a simple HTTP Server in the main directory.
+Download the zip or clone into the project. To use it you need to run a simple HTTP Server in the main directory.
 
 On Unix-type OSes you can usually use ```python -m SimpleHTTPServer 9001``` .
 
@@ -15,7 +17,7 @@ If you prefer NodeJS, you can install a web server with
     npm install http-server -g
     http-server -p 9001
 
-After that, you should be able to open ```http://localhost:9001/playground``` and see this:
+After that, you should be able to open ```http://localhost:9001/playground``` and see something like this:
 
 ![screenshot](screenshot2.png)
 
