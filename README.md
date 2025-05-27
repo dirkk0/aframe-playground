@@ -1,3 +1,6 @@
+*This repository is archived*
+
+
 # A-Frame Playground
 
 The A-Frame playground aims to provide a tool to edit and show A-Frame examples in the most frictionless way possible. It doesn't need any online connection and only needs a local webserver.
